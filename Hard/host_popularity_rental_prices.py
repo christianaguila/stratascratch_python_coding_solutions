@@ -19,7 +19,7 @@ Output host popularity rating and their minimum, average and maximum rental pric
 import pandas as pd
 
 # Start writing code
-df = airbnb_host_searches
+df = airbnb_host_searches.copy()
 df['host_id'] = df[['price','room_type', 'host_since', 'zipcode', 'number_of_reviews']].apply(lambda x: "_".join(x.astype(str)), axis=1)
 df2 = df[['host_id', 'price', 'number_of_reviews']].drop_duplicates()
 df2['host_popularity'] = df2['number_of_reviews'].apply(lambda x: 'New' if x==0 else 'Rising' if x>=1 and x<=5 else 'Trending Up' if x>=6 and x<=15 else 'Popular' if x>=16 and x<=40 else 'Hot')
